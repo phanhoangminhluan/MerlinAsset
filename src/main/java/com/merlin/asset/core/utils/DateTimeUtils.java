@@ -184,10 +184,4 @@ public class DateTimeUtils {
     public static String reformatDate(String dateString, String sourceFormat, DateTimeFormatter targetFormat) {
         return reformatDate(dateString, sourceFormat, targetFormat, "UTC", "UTC");
     }
-
-    public static void main(String[] args) {
-        String a = convertZonedDateTimeToFormat_ISO8601_V2(ZonedDateTime.now(), "Asia/Ho_Chi_Minh");
-        System.out.println(a);
-    }
-
 }
