@@ -22,14 +22,14 @@ public class DateTimeUtils {
             .appendOffsetId()
             .optionalStart()
             .toFormatter();
-    public static final DateTimeFormatter CMIE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter MA_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .append(ISO_LOCAL_TIME)
             .optionalStart()
             .appendOffsetId()
             .optionalStart()
             .toFormatter();
 
-    public static final DateTimeFormatter CMIE_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter MA_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .append(DateTimeFormatter.ISO_LOCAL_DATE)
             .appendLiteral(' ')
@@ -49,7 +49,7 @@ public class DateTimeUtils {
             .appendLiteral('Z')
             .toFormatter();
 
-    public static final DateTimeFormatter CMIE_YYYY_MM_DD_HH_MM = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter MA_YYYY_MM_DD_HH_MM = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .append(DateTimeFormatter.ISO_LOCAL_DATE)
             .appendLiteral(' ')
@@ -57,7 +57,7 @@ public class DateTimeUtils {
             .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
             .toFormatter();
 
-    public static final DateTimeFormatter CMIE_YYYY_MM_DD_HH_MM_SS = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter MA_YYYY_MM_DD_HH_MM_SS = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .append(DateTimeFormatter.ISO_LOCAL_DATE)
             .appendLiteral(' ')
@@ -68,13 +68,14 @@ public class DateTimeUtils {
             .appendFraction(ChronoField.MICRO_OF_SECOND, 3, 3, false)
             .toFormatter();
 
-    public static final DateTimeFormatter CMIE_LOG = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter MA_LOG = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .append(DateTimeFormatter.ISO_LOCAL_DATE)
             .appendLiteral('-')
             .appendValue(ChronoField.HOUR_OF_DAY, 2)
             .toFormatter();
     public static final String CDP_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
 
     public static ZonedDateTime getCurrentZonedDateTime(String timeZone) {
@@ -146,7 +147,20 @@ public class DateTimeUtils {
     }
 
     public static ZonedDateTime convertStringToZonedDateTime(String dateString, String pattern, String sourceTimeZone, String targetTimeZone) {
+        if (ParserUtils.isNullOrEmpty(dateString)) {
+            return null;
+        }
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime localDateTime = LocalDateTime.parse(dateString, dateTimeFormatter);
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(sourceTimeZone));
+        return zonedDateTime.withZoneSameInstant(ZoneId.of(targetTimeZone));
+    }
+
+
+    public static ZonedDateTime convertStringToZonedDateTime(String dateString, DateTimeFormatter dateTimeFormatter, String sourceTimeZone, String targetTimeZone) {
+        if (ParserUtils.isNullOrEmpty(dateString)) {
+            return null;
+        }
         LocalDateTime localDateTime = LocalDateTime.parse(dateString, dateTimeFormatter);
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(sourceTimeZone));
         return zonedDateTime.withZoneSameInstant(ZoneId.of(targetTimeZone));

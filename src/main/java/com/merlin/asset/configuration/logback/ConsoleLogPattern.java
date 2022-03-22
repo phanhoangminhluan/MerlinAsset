@@ -33,7 +33,7 @@ public class ConsoleLogPattern extends LayoutBase<ILoggingEvent> {
         String loggingDate = DateTimeUtils.convertZonedDateTimeToFormat(
                 DateTimeUtils.fromEpochMilli(iLoggingEvent.getTimeStamp(), "Asia/Ho_Chi_Minh"),
                 "Asia/Ho_Chi_Minh",
-                DateTimeUtils.CMIE_YYYY_MM_DD_HH_MM_SS
+                DateTimeUtils.MA_YYYY_MM_DD_HH_MM_SS
         );
         loggingDate = setColor(loggingDate, ANSI_GRAY);
         Level level = iLoggingEvent.getLevel();

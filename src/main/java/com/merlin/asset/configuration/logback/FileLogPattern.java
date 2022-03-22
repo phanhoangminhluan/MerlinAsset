@@ -16,7 +16,7 @@ public class FileLogPattern extends LayoutBase<ILoggingEvent> {
         String loggingDate = DateTimeUtils.convertZonedDateTimeToFormat(
                 DateTimeUtils.fromEpochMilli(iLoggingEvent.getTimeStamp(), "Asia/Ho_Chi_Minh"),
                 "Asia/Ho_Chi_Minh",
-                DateTimeUtils.CMIE_YYYY_MM_DD_HH_MM_SS
+                DateTimeUtils.MA_YYYY_MM_DD_HH_MM_SS
         );
         Level level = iLoggingEvent.getLevel();
         String levelStr = level.levelStr;
