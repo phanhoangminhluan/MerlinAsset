@@ -26,4 +26,8 @@ public class LogUtils {
         }
         return result.toString();
     }
+
+    public static String genLogId(String value) {
+        return String.format("[%s_%s]", System.currentTimeMillis(), value);
+    }
 }
