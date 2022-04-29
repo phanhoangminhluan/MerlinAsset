@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
@@ -198,4 +199,29 @@ public class DateTimeUtils {
     public static String reformatDate(String dateString, String sourceFormat, DateTimeFormatter targetFormat) {
         return reformatDate(dateString, sourceFormat, targetFormat, "UTC", "UTC");
     }
+
+    public static boolean verifyDateTimeFormat(String rawDateTime, String format) {
+        DateTimeFormatter dateTimeFormatter = getFormatterWithDefaultValue(format);
+
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(rawDateTime, dateTimeFormatter);
+            String result = localDateTime.format(dateTimeFormatter);
+            return result.equals(rawDateTime);
+        } catch (DateTimeParseException ignored) {
+            return false;
+        }
+    }
+
+    public static DateTimeFormatter getFormatterWithDefaultValue(String format) {
+        return new DateTimeFormatterBuilder()
+                .appendPattern(format)
+                .parseDefaulting(ChronoField.YEAR_OF_ERA, 1970)
+                .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
+                .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+                .toFormatter();
+    }
+
 }
