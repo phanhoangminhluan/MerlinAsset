@@ -290,6 +290,38 @@ public class MapUtils {
         }
     }
 
+    public static double getDouble(@Nullable Map<String, Object> map, @Nonnull String key) {
+        return getDouble(map, key, 0);
+    }
+
+    public static double getDouble(@Nullable Map<String, Object> map, @Nonnull String key, double defaultValue) {
+        if (map == null || map.isEmpty()) {
+            return defaultValue;
+        }
+
+        if (key.contains(".")) {
+            BiFunction<Map<String, Object>, String, Object> getMethod = (aMap, singleKey) -> getDouble(aMap, singleKey, defaultValue);
+            Object obj = getNestedObject(map, key, defaultValue, getMethod);
+            try {
+                String doubleResult = ParserUtils.toString(obj);
+                return new Double(doubleResult);
+            }catch (Exception e) {
+                return defaultValue;
+            }
+        }
+
+        if (map.get(key) == null) {
+            return defaultValue;
+        }
+
+        try {
+            String doubleResult = ParserUtils.toString(map.get(key));
+            return new Double(doubleResult);
+        } catch (Exception exception) {
+            return defaultValue;
+        }
+    }
+
     public static long getLong(@Nullable Map<String, Object> map, @Nonnull String key) {
         return getLong(map, key, 0);
     }

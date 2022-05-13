@@ -78,6 +78,14 @@ public class DateTimeUtils {
     public static final String CDP_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
+    public static final String FMT_01 = "yyyy-MM-dd HH:mm:ss";
+    public static final String FMT_02 = "yyyy-MM-dd HH:mm:ss.S";
+    public static final String FMT_03 = "yyyy-MM-dd";
+    public static final String FMT_04 = "yyyyMM";
+    public static final String FMT_05 = "yyyy";
+    public static final String FMT_06 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    public static final String FMT_07 = "yyyyMMdd";
+
 
     public static ZonedDateTime getCurrentZonedDateTime(String timeZone) {
         LocalDateTime localDateTime = LocalDateTime.now();
