@@ -85,7 +85,11 @@ public class DateTimeUtils {
     public static final String FMT_05 = "yyyy";
     public static final String FMT_06 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     public static final String FMT_07 = "yyyyMMdd";
-
+    public static final String FMT_08 = "yyyy/MM/dd";
+    public static final String FMT_09 = "dd/MM/yyyy";
+    public static final String FMT_10 = "dd-MM-yyyy";
+    public static final String FMT_11 = "dd-MM-yyyy HH:mm:ss";
+    public static final String FMT_12 = "dd/MM/yyyy HH:mm:ss";
 
     public static ZonedDateTime getCurrentZonedDateTime(String timeZone) {
         LocalDateTime localDateTime = LocalDateTime.now();
