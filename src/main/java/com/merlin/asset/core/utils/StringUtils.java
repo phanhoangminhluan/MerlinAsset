@@ -15,7 +15,7 @@ public class StringUtils {
     public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        return pattern.matcher(nfdNormalizedString).replaceAll("");
+        return pattern.matcher(nfdNormalizedString).replaceAll("").replace("đ", "d");
     }
 
     public static String makeCamelCase(String str) {
@@ -34,11 +34,4 @@ public class StringUtils {
         }
         return String.join("", arr);
     }
-
-    public static void main(String[] args) {
-       String str = makeCamelCase("Phan Hoàng Minh Luân");
-       System.out.println(str);
-
-    }
-
 }
