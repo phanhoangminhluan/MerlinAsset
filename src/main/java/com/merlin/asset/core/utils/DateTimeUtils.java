@@ -159,6 +159,12 @@ public class DateTimeUtils {
         return dtf.withZone(ZoneId.of(timeZone)).format(date);
     }
 
+    public static String convertZonedDateTimeToFormat(ZonedDateTime date, String timeZone, String format) {
+        if (date == null) return null;
+        if (timeZone == null) return null;
+        return getFormatterWithDefaultValue(format).withZone(ZoneId.of(timeZone)).format(date);
+    }
+
     public static ZonedDateTime convertStringToZonedDateTime(String dateString, String pattern, String sourceTimeZone, String targetTimeZone) {
         if (ParserUtils.isNullOrEmpty(dateString)) {
             return null;
