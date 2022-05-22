@@ -1,5 +1,7 @@
 package com.merlin.asset.core.utils;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -228,6 +230,20 @@ public class DateTimeUtils {
         } catch (DateTimeParseException ignored) {
             return false;
         }
+    }
+
+    public static String getRunningTimeInSecond(long t1) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.UP);
+
+        return df.format((System.currentTimeMillis() - t1) / 1000.0) + "s";
+    }
+
+    public static String getRunningTimeInMinute(long t1) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.UP);
+
+        return df.format((System.currentTimeMillis() - t1) / 1000.0 / 60.0) + "m";
     }
 
     public static DateTimeFormatter getFormatterWithDefaultValue(String format) {
