@@ -239,11 +239,25 @@ public class DateTimeUtils {
         return df.format((System.currentTimeMillis() - t1) / 1000.0) + "s";
     }
 
+    public static String getRunningTimeInSecond(long end, long start) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.UP);
+
+        return df.format((end - start) / 1000.0) + "s";
+    }
+
     public static String getRunningTimeInMinute(long t1) {
         DecimalFormat df = new DecimalFormat("0.00");
         df.setRoundingMode(RoundingMode.UP);
 
         return df.format((System.currentTimeMillis() - t1) / 1000.0 / 60.0) + "m";
+    }
+
+    public static String getRunningTimeInMinute(long end, long start) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.UP);
+
+        return df.format((end - start) / 1000.0 / 60.0) + "m";
     }
 
     public static DateTimeFormatter getFormatterWithDefaultValue(String format) {

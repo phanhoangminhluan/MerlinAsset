@@ -367,12 +367,24 @@ public class MapUtils {
             return defaultValue;
         }
 
-        if (map.get(key) == null) {
-            return defaultValue;
+        List<Map<String, Object>> result = null;
+        if (key.contains(".")) {
+            BiFunction<Map<String, Object>, String, Object> getMethod = (aMap, singleKey) -> getListMapStringObject(aMap, singleKey, defaultValue);
+            Object obj = getNestedObject(map, key, defaultValue, getMethod);
+            try {
+                result = (List<Map<String, Object>>) obj;
+                return result == null ? defaultValue : result;
+            } catch (Exception e) {
+                return defaultValue;
+            }
         }
 
         try {
-            return (List<Map<String, Object>>) map.get(key);
+            result = (List<Map<String, Object>>) map.get(key);
+
+            if (result == null) return defaultValue;
+            else return result;
+
         } catch (Exception exception) {
             return defaultValue;
         }
