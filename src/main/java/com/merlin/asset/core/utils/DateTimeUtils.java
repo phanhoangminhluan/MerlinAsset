@@ -219,6 +219,9 @@ public class DateTimeUtils {
     public static String reformatDate(String dateString, String sourceFormat, DateTimeFormatter targetFormat) {
         return reformatDate(dateString, sourceFormat, targetFormat, "UTC", "UTC");
     }
+    public static String reformatDate(String dateString, String sourceFormat, String targetFormat) {
+        return reformatDate(dateString, sourceFormat, DateTimeUtils.getFormatterWithDefaultValue(targetFormat), "UTC", "UTC");
+    }
 
     public static boolean verifyDateTimeFormat(String rawDateTime, String format) {
         DateTimeFormatter dateTimeFormatter = getFormatterWithDefaultValue(format);
